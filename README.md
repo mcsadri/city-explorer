@@ -38,8 +38,8 @@ City Explorer is a React application that uses the Axios library to make user-in
 |--------------------------|--------------------|---------------|---------------|----------------------|
 | Est. Time to Complete    | 01:00 | --:-- | --:-- | --:-- |
 | Start Time               | 19:30 | --:-- | --:-- | --:-- |
-| Finish Time              | --:-- | --:-- | --:-- | --:-- |
-| Actual Time to Complete  | --:-- | --:-- | --:-- | --:-- |
+| Finish Time              | 20:05 | --:-- | --:-- | --:-- |
+| Actual Time to Complete  | -1:05 | --:-- | --:-- | --:-- |
 
 ### Web Request-Response Cycle - completed with Camilla Rees
 
