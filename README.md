@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: Manuch Sadri  
-**Version**: 1.0.0
+**Version**: 1.0.1
 
 **Site**: [mcsadri-city-explorer.netlify.app/](https://mcsadri-city-explorer.netlify.app/)  
 **Trello board**: [trello.com/b/jvSJYqyl/city-explorer](https://trello.com/b/jvSJYqyl/city-explorer)
@@ -18,14 +18,14 @@ City Explorer is a React application that uses the Axios library to make user-in
 
 ## Change Log
 
-- 2022-10-08: Completed implementation of Lab 06 requirements (less CSS styling). 
+- 2022-10-08: Completed implementation of Lab 06 requirements (less CSS styling).
 - 2022-10-07: Completed creation of React-Bootstrap form, API call to LocationIq, and conditional rendering of Location component (lab 06, user story 2)
 - 2022-10-05: Initial set-up of React app and Netlify site (lab 06, user story 1)
 
 ## Credit and Collaborations
 
 - Camilla Rees ([github.com/camillarees](https://github.com/camillarees)): partner for drawing the web request-response cycle for Lab 06
-- Andra Steele ([github.com/asteele1493](https://github.com/asteele1493)): pair programming partner to complete implementation of Lab 06 User Story 4.
+- Andra Steele ([github.com/asteele1493](https://github.com/asteele1493)): pair programming partner to complete Lab 06 User Story 4.
 
 ---
 
