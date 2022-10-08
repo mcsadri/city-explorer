@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Image from 'react-bootstrap/Image'
 
 class LocMap extends React.Component {
@@ -11,22 +10,13 @@ class LocMap extends React.Component {
         }
     };
 
-    getMap = async () => {
-        const locIqMap = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.props.location.lat},${this.props.location.lon}&zoom:11`;
-        const response = await axios.get(locIqMap);
-        console.log('locIqMap: ', locIqMap);
-        this.setState({mapUrl: response});
-    };
-
     render () {
         return (
             <>
-                map = {this.getMap()};
-                {/* <Image
-                    src={}
-                    alt={}
-                    title={}
-                /> */}
+                {/* Image display solution completed with assistance from Andra Steele */}
+                <Image
+                    src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.props.location.lat},${this.props.location.lon}&zoom:11`}
+                />
             </>
         )
     }

@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import LocInfo from './LocInfo';
-import LocMap from './LocMap';
 
 class App extends React.Component {
 
