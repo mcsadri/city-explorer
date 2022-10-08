@@ -31,14 +31,16 @@ class App extends React.Component {
     //     }
     // };
 
+    // try/catch and <Alert> solution completed via pair programming with Andra Steele
     searchCity = async () => {
         try {
             const locIq = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.userCity}&format=json`;
             const response = await axios.get(locIq);
-            this.setState({ location: response.data[0] });
+            this.setState({ location: response.data[0] }); 
+            this.setState({apiError: false});
         } catch (err) {
-            this.setState({apiError: true});
-            this.setState({location: {}});
+            this.setState({ apiError: true });
+            this.setState({ location: {} });
             console.error(this.state.err);
         }
     };
@@ -65,12 +67,11 @@ class App extends React.Component {
                             Explore!
                         </Button>
                     </Form>
-
-                {this.state.apiError &&
-                    <Alert variant="danger">
-                        <Alert.Heading>Error: Unable to Geocode!</Alert.Heading>
-                    </Alert>
-                }
+                    {this.state.apiError &&
+                        <Alert variant="danger">
+                            <Alert.Heading>Error: Unable to Geocode!</Alert.Heading>
+                        </Alert>
+                    }
                 </Container>
                 <br />
                 <div>
