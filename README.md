@@ -1,7 +1,7 @@
 # Project Name
 
 **Author**: Manuch Sadri
-**Version**: 0.1.0
+**Version**: 0.2.1
 
 ## Overview
 
@@ -36,8 +36,8 @@ City Explorer is a React application that uses the Axios library to make user-in
 
 | Number & Name of Feature | #1: Set-up | #2: Locations | #3: Map | #4: Errors |
 |--------------------------|--------------------|---------------|---------------|----------------------|
-| Est. Time to Complete    | 01:00 | --:-- | --:-- | --:-- |
-| Start Time               | 19:30 | --:-- | --:-- | --:-- |
+| Est. Time to Complete    | 01:00 | -1:00 | --:-- | --:-- |
+| Start Time               | 19:30 | 20:35 | --:-- | --:-- |
 | Finish Time              | 20:05 | --:-- | --:-- | --:-- |
 | Actual Time to Complete  | -1:05 | --:-- | --:-- | --:-- |
 
