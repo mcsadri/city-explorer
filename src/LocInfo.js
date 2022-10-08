@@ -6,7 +6,7 @@ class LocInfo extends React.Component {
     render() {
         return (
             <>
-                <h2>The city you searched for is: {this.props.location.display_name}</h2>
+                <h3>The city you searched for is: {this.props.location.display_name}</h3>
                 <Accordion>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Show Latitude</Accordion.Header>
