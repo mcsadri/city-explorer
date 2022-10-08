@@ -3,6 +3,7 @@ import './App.css';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 import LocInfo from './LocInfo';
 
@@ -12,7 +13,9 @@ class App extends React.Component {
         super(props);
         this.state = {
             userCity: '',
-            location: {}
+            location: {},
+            err: 'Error: Unable to Geocode!',
+            apiError: false,
         }
     };
 
@@ -29,9 +32,15 @@ class App extends React.Component {
     // };
 
     searchCity = async () => {
-        const locIq = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.userCity}&format=json`;
-        const response = await axios.get(locIq);
-        this.setState({location: response.data[0]});
+        try {
+            const locIq = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.userCity}&format=json`;
+            const response = await axios.get(locIq);
+            this.setState({ location: response.data[0] });
+        } catch (err) {
+            this.setState({apiError: true});
+            this.setState({location: {}});
+            console.error(this.state.err);
+        }
     };
 
     render() {
@@ -46,8 +55,8 @@ class App extends React.Component {
                                 onChange={this.getCity}
                                 type="text"
                                 placeholder="Seattle"
-                                // onKeyPress={this.getKeyPress} 
-                             />
+                            // onKeyPress={this.getKeyPress} 
+                            />
                         </Form.Group>
                         <Button
                             onClick={this.searchCity}
@@ -57,12 +66,17 @@ class App extends React.Component {
                         </Button>
                     </Form>
 
+                {this.state.apiError &&
+                    <Alert variant="danger">
+                        <Alert.Heading>Error: Unable to Geocode!</Alert.Heading>
+                    </Alert>
+                }
                 </Container>
-                <br/>
+                <br />
                 <div>
                     {this.state.location.display_name &&
                         <LocInfo
-                            location = {this.state.location}
+                            location={this.state.location}
                         />
                     }
                 </div>
