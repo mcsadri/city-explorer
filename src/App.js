@@ -12,15 +12,17 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userCity: '',
+            searchQuery: '',
             location: {},
+            weather: [],
             err: 'Error: Unable to Geocode!',
-            apiError: false,
+            dispResults: false,
+            dispError: false,
         }
     };
 
     getCity = (event) => {
-        this.setState({ userCity: event.target.value });
+        this.setState({searchQuery: event.target.value});
     };
 
     // getKeyPress = (event) => {
@@ -34,16 +36,37 @@ class App extends React.Component {
     // try/catch and <Alert> solution completed via pair programming with Andra Steele
     searchCity = async () => {
         try {
-            const locIq = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.userCity}&format=json`;
-            const response = await axios.get(locIq);
-            this.setState({ location: response.data[0] }); 
-            this.setState({apiError: false});
+            const locationUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
+            const response = await axios.get(locationUrl);
+            this.setState({location: response.data[0]});
+            this.setState({
+                dispResults: true,
+                dispError: false
+            }, () => this.getWeather());
         } catch (err) {
-            this.setState({ apiError: true });
-            this.setState({ location: {} });
+            this.setState({
+                dispResults: false,
+                dispError: true
+            });
             console.error(this.state.err);
         }
     };
+
+    getWeather = async () => {
+        try {
+            const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
+            let response = await axios.get(weatherUrl);
+            console.log('Weather data from server: ', response.data);
+            this.setState({weather: response.data});
+        } catch (err) {
+            this.setState({
+                dispResults: false,
+                dispError: true
+            });
+            console.error(this.state.err);
+        }
+    };
+
 
     render() {
         return (
@@ -67,7 +90,7 @@ class App extends React.Component {
                             Explore!
                         </Button>
                     </Form>
-                    {this.state.apiError &&
+                    {this.state.dispError &&
                         <Alert variant="danger">
                             <Alert.Heading>Error: Unable to Geocode!</Alert.Heading>
                         </Alert>
@@ -75,9 +98,10 @@ class App extends React.Component {
                 </Container>
                 <br />
                 <div>
-                    {this.state.location.display_name &&
+                    {this.state.dispResults &&
                         <LocInfo
                             location={this.state.location}
+                            weather={this.state.weather}
                         />
                     }
                 </div>

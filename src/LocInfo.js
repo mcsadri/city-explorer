@@ -18,6 +18,32 @@ class LocInfo extends React.Component {
                             <LocMap location={this.props.location}/>
                         </Accordion.Body>
                     </Accordion.Item>
+
+                    {/* <Accordion.Item eventKey="2">
+                        <Accordion.Header>Weather forecast for {this.props.weather.data[0].datetime}</Accordion.Header>
+                        <Accordion.Body>The weather forecast for </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="3">
+                        <Accordion.Header>Weather forecast for {}</Accordion.Header>
+                        <Accordion.Body></Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="4">
+                        <Accordion.Header>Weather forecast for${}</Accordion.Header>
+                        <Accordion.Body></Accordion.Body>
+                    </Accordion.Item> */}
+
+                    <Accordion.Item eventKey="5">
+                        <Accordion.Header>Weather forecast</Accordion.Header>
+                        <Accordion.Body>
+                            {this.props.weather.map(forecast => (
+                                <>
+                                    <b>{forecast.date} </b>
+                                    {forecast.description}<br/>
+                                </>
+                            ))}
+                        </Accordion.Body>
+                    </Accordion.Item>
+
                 </Accordion>
             </>
         );
