@@ -15,7 +15,9 @@ class App extends React.Component {
             searchQuery: '',
             location: {},
             weather: [],
-            err: 'Error: Unable to Geocode!',
+            // err: 'Error: Unable to Geocode!',
+            errorLocation: '',
+            errorWeather: '',
             dispResults: false,
             dispError: false,
         }
@@ -40,33 +42,41 @@ class App extends React.Component {
             const response = await axios.get(locationUrl);
             this.setState({location: response.data[0]});
             this.setState({
-                dispResults: true,
-                dispError: false
-            }, () => this.getWeather());
-        } catch (err) {
+                // dispResults: true,
+                // dispError: false,
+                errorLocation: ''
+            }, () => this.searchWeather());
+        } catch (error) {
             this.setState({
-                dispResults: false,
-                dispError: true
+                // dispResults: false,
+                // dispError: true,
+                location: {},
+                errorLocation: error.message
             });
-            console.error(this.state.err);
+            console.error(error);
         }
     };
 
-    getWeather = async () => {
+    searchWeather = async () => {
         try {
             const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
             let response = await axios.get(weatherUrl);
             console.log('Weather data from server: ', response.data);
-            this.setState({weather: response.data});
-        } catch (err) {
             this.setState({
-                dispResults: false,
-                dispError: true
+                weather: response.data,
+                errorWeather: ''
             });
-            console.error(this.state.err);
+        } catch (error) {
+            console.log(error)
+            this.setState({
+                // dispResults: false,
+                // dispError: true,
+                weather: [],
+                errorWeather: `status ${error.response.status}: ${error.response.statusText}`
+            });
+            // console.error(this.state.errorWeather);
         }
     };
-
 
     render() {
         return (
@@ -90,15 +100,26 @@ class App extends React.Component {
                             Explore!
                         </Button>
                     </Form>
-                    {this.state.dispError &&
+                    {this.state.errorLocation.length > 0 &&
                         <Alert variant="danger">
-                            <Alert.Heading>Error: Unable to Geocode!</Alert.Heading>
+                            <Alert.Heading>
+                                Unable to find that location:<br/>
+                                {this.state.errorLocation}
+                            </Alert.Heading>
+                        </Alert>
+                    }
+                    {this.state.errorWeather.length > 0 &&
+                        <Alert variant="danger">
+                            <Alert.Heading>
+                                Unable to find the weather for that location:<br/>
+                                {this.state.errorWeather}
+                            </Alert.Heading>
                         </Alert>
                     }
                 </Container>
                 <br />
                 <div>
-                    {this.state.dispResults &&
+                    {(this.state.location.display_name || this.state.weather.date) &&
                         <LocInfo
                             location={this.state.location}
                             weather={this.state.weather}
