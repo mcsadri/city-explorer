@@ -12,15 +12,19 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userCity: '',
+            searchQuery: '',
             location: {},
-            err: 'Error: Unable to Geocode!',
-            apiError: false,
+            weather: [],
+            // err: 'Error: Unable to Geocode!',
+            errorLocation: '',
+            errorWeather: '',
+            dispResults: false,
+            dispError: false,
         }
     };
 
     getCity = (event) => {
-        this.setState({ userCity: event.target.value });
+        this.setState({searchQuery: event.target.value});
     };
 
     // getKeyPress = (event) => {
@@ -34,14 +38,43 @@ class App extends React.Component {
     // try/catch and <Alert> solution completed via pair programming with Andra Steele
     searchCity = async () => {
         try {
-            const locIq = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.userCity}&format=json`;
-            const response = await axios.get(locIq);
-            this.setState({ location: response.data[0] }); 
-            this.setState({apiError: false});
-        } catch (err) {
-            this.setState({ apiError: true });
-            this.setState({ location: {} });
-            console.error(this.state.err);
+            const locationUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
+            const response = await axios.get(locationUrl);
+            this.setState({location: response.data[0]});
+            this.setState({
+                // dispResults: true,
+                // dispError: false,
+                errorLocation: ''
+            }, () => this.searchWeather());
+        } catch (error) {
+            this.setState({
+                // dispResults: false,
+                // dispError: true,
+                location: {},
+                errorLocation: error.message
+            });
+            console.error(error);
+        }
+    };
+
+    searchWeather = async () => {
+        try {
+            const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
+            let response = await axios.get(weatherUrl);
+            console.log('Weather data from server: ', response.data);
+            this.setState({
+                weather: response.data,
+                errorWeather: ''
+            });
+        } catch (error) {
+            console.log(error)
+            this.setState({
+                // dispResults: false,
+                // dispError: true,
+                weather: [],
+                errorWeather: `status ${error.response.status}: ${error.response.statusText}`
+            });
+            // console.error(this.state.errorWeather);
         }
     };
 
@@ -67,17 +100,29 @@ class App extends React.Component {
                             Explore!
                         </Button>
                     </Form>
-                    {this.state.apiError &&
+                    {this.state.errorLocation.length > 0 &&
                         <Alert variant="danger">
-                            <Alert.Heading>Error: Unable to Geocode!</Alert.Heading>
+                            <Alert.Heading>
+                                Unable to find that location:<br/>
+                                {this.state.errorLocation}
+                            </Alert.Heading>
+                        </Alert>
+                    }
+                    {this.state.errorWeather.length > 0 &&
+                        <Alert variant="danger">
+                            <Alert.Heading>
+                                Unable to find the weather for that location:<br/>
+                                {this.state.errorWeather}
+                            </Alert.Heading>
                         </Alert>
                     }
                 </Container>
                 <br />
                 <div>
-                    {this.state.location.display_name &&
+                    {(this.state.location.display_name || this.state.weather.date) &&
                         <LocInfo
                             location={this.state.location}
+                            weather={this.state.weather}
                         />
                     }
                 </div>
