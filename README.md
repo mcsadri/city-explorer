@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: Manuch Sadri  
-**Version**: 2.0.1
+**Version**: 2.1.0
 
 **Site**: [mcsadri-city-explorer.netlify.app/](https://mcsadri-city-explorer.netlify.app/)  
 **Trello board**: [trello.com/b/jvSJYqyl/city-explorer](https://trello.com/b/jvSJYqyl/city-explorer)

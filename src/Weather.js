@@ -6,8 +6,10 @@ class Weather extends React.Component {
             <>
                 {this.props.weather.map(forecast => (
                     <>
-                        <b>{forecast.date} </b>
-                        {forecast.description}<br/>
+                        <b>{forecast.date} </b><br/>
+                        Description: {forecast.description}<br/>
+                        Low temp: {forecast.lowTemp}<br/>
+                        High temp: {forecast.highTemp}<br/>
                     </>
                 ))}
             </>
