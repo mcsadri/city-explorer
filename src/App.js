@@ -15,11 +15,12 @@ class App extends React.Component {
             searchQuery: '',
             location: {},
             weather: [],
-            // err: 'Error: Unable to Geocode!',
+            movies: [],
             errorLocation: '',
             errorWeather: '',
-            dispResults: false,
-            dispError: false,
+            errorMovie: '',
+            // dispResults: false,
+            // dispError: false,
         }
     };
 
@@ -45,7 +46,10 @@ class App extends React.Component {
                 // dispResults: true,
                 // dispError: false,
                 errorLocation: ''
-            }, () => this.searchWeather());
+            }, () => {
+                this.searchWeather();
+                this.searchMovie();
+            });
         } catch (error) {
             this.setState({
                 // dispResults: false,
@@ -59,7 +63,7 @@ class App extends React.Component {
 
     searchWeather = async () => {
         try {
-            const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}&lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
+            const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
             let response = await axios.get(weatherUrl);
             console.log('Weather data from server: ', response.data);
             this.setState({
@@ -69,12 +73,27 @@ class App extends React.Component {
         } catch (error) {
             console.log(error)
             this.setState({
-                // dispResults: false,
-                // dispError: true,
                 weather: [],
-                errorWeather: `status ${error.response.status}: ${error.response.statusText}`
+                errorWeather: `Weather error. Status ${error.response.status}: ${error.response.statusText}`
             });
-            // console.error(this.state.errorWeather);
+        }
+    };
+
+    searchMovie = async () => {
+        try {
+            const movieUrl = `${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.searchQuery}`;
+            let response = await axios.get(movieUrl);
+            console.log('Movie data from server: ', response.data);
+            this.setState({
+                movies: response.data,
+                errorMovie: ''
+            });
+        } catch (error) {
+            console.log(error)
+            this.setState({
+                movies: [],
+                errorMovie: `Movie error. Status ${error.response.status}: ${error.response.statusText}`
+            });
         }
     };
 
@@ -116,13 +135,22 @@ class App extends React.Component {
                             </Alert.Heading>
                         </Alert>
                     }
+                    {this.state.errorMovie.length > 0 &&
+                        <Alert variant="danger">
+                            <Alert.Heading>
+                                Unable to find any movies for that location:<br/>
+                                {this.state.errorMovie}
+                            </Alert.Heading>
+                        </Alert>
+                    }
                 </Container>
                 <br />
                 <div>
-                    {(this.state.location.display_name || this.state.weather.date) &&
+                    {(this.state.location.display_name || this.state.weather.date || this.state.movies.title) &&
                         <LocInfo
                             location={this.state.location}
                             weather={this.state.weather}
+                            movies={this.state.movies}
                         />
                     }
                 </div>
