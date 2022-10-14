@@ -2,6 +2,7 @@ import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import LocMap from './LocMap';
 import Weather from './Weather';
+import Movies from './Movies';
 
 class LocInfo extends React.Component {
     render() {
@@ -28,6 +29,15 @@ class LocInfo extends React.Component {
                         <Accordion.Body>
                             <Weather
                                 weather={this.props.weather}
+                            />
+                        </Accordion.Body>
+                    </Accordion.Item>
+
+                    <Accordion.Item eventKey="4">
+                        <Accordion.Header>Related movies (sort of)</Accordion.Header>
+                        <Accordion.Body>
+                            <Movies
+                                movies={this.props.movies}
                             />
                         </Accordion.Body>
                     </Accordion.Item>
