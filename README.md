@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: Manuch Sadri  
-**Version**: 3.0.0
+**Version**: 3.1.0
 
 **Site**: [mcsadri-city-explorer.netlify.app/](https://mcsadri-city-explorer.netlify.app/)  
 **Trello board**: [trello.com/b/jvSJYqyl/city-explorer](https://trello.com/b/jvSJYqyl/city-explorer)
@@ -26,6 +26,29 @@ City Explorer is a React application that uses the Axios library to make user-in
 
 - Camilla Rees ([github.com/camillarees](https://github.com/camillarees)): partner for drawing the web request-response cycle for Lab 06
 - Andra Steele ([github.com/asteele1493](https://github.com/asteele1493)): pair programming partner to complete Lab 06 User Story 4.
+- Ezgi Coban ([github.com/ezgi-c](https://github.com/ezgi-c)) & Chris Lopez ([github.com/BedlaminGoliath](https://github.com/BedlaminGoliath)): partners for drawing the web request-response cycle for lab 09
+
+---
+
+## Lab 09
+
+### Tasks & User Stories 09
+
+1. Refactor: Modularize the back-end codebase.
+2. Refactor: Componentize the front-end codebase.
+
+### Time Estimate 09
+
+| Number & Name of Feature | #1: Ref. Back-end | #2: Ref. Front-end |
+|--------------------------|-------------------|--------------------|
+| Est. Time to Complete    | 01:00 | --:-- |
+| Start Time               | 20:00 | --:-- |
+| Finish Time              | 21:30 | --:-- |
+| Actual Time to Complete  | 01:30 | --:-- |
+
+### Web Request-Response Cycle - completed with Ezgi Coban & Chris Lopez
+
+[Web Request-Response Cycle - lab 09](/public/images/request-response-lab09.jpg "Web Request-Response Cycle")
 
 ---
 
@@ -41,8 +64,8 @@ City Explorer is a React application that uses the Axios library to make user-in
 ### Time Estimate 06
 
 | Number & Name of Feature | #1: Set-up | #2: Locations | #3: Map | #4: Errors |
-|--------------------------|--------------------|---------------|---------------|----------------------|
-| Est. Time to Complete    | 01:00 | 01:00 | 01:00 | -1:00 |
+|--------------------------|------------|---------------|---------|------------|
+| Est. Time to Complete    | 01:00 | 01:00 | 01:00 | 01:00 |
 | Start Time               | 19:30 | 20:35 | 00:00 | 15:30 |
 | Finish Time              | 20:05 | ??:?? | ??:?? | 16:00 |
 | Actual Time to Complete  | 01:05 | ??:?? | ??:?? | 00:30 |
