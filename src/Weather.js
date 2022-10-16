@@ -9,18 +9,29 @@ class Weather extends React.Component {
             <Row>
                 {this.props.weather.map(forecast => (
                     <Col>
-                        <Card>
-                            <Card.Title>{forecast.date}</Card.Title>
-                            <Card.Text><b>Outlook</b>: {forecast.description}</Card.Text>
-                            <Card.Text><b>Low temp</b>: {forecast.lowTemp}</Card.Text>
-                            <Card.Text><b>High temp</b>: {forecast.highTemp}</Card.Text>
-                        </Card>
+                        <Forecast
+                            forecast = {forecast}
+                        />
                     </Col>
                 ))}
             </Row>
         );
     }
 }
-    
+
+class Forecast extends React.Component {
+    render() {
+        const forecast = this.props.forecast;
+        return (
+            <Card>
+                <Card.Title>{forecast.date}</Card.Title>
+                <Card.Text><b>Outlook</b>: {forecast.description}</Card.Text>
+                <Card.Text><b>Low temp</b>: {forecast.lowTemp}</Card.Text>
+                <Card.Text><b>High temp</b>: {forecast.highTemp}</Card.Text>
+            </Card>
+        )
+    }
+}
+
 export default Weather;
     

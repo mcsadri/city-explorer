@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: Manuch Sadri  
-**Version**: 3.1.0
+**Version**: 4.0.0
 
 **Site**: [mcsadri-city-explorer.netlify.app/](https://mcsadri-city-explorer.netlify.app/)  
 **Trello board**: [trello.com/b/jvSJYqyl/city-explorer](https://trello.com/b/jvSJYqyl/city-explorer)
@@ -41,10 +41,10 @@ City Explorer is a React application that uses the Axios library to make user-in
 
 | Number & Name of Feature | #1: Ref. Back-end | #2: Ref. Front-end |
 |--------------------------|-------------------|--------------------|
-| Est. Time to Complete    | 01:00 | --:-- |
-| Start Time               | 20:00 | --:-- |
-| Finish Time              | 21:30 | --:-- |
-| Actual Time to Complete  | 01:30 | --:-- |
+| Est. Time to Complete    | 01:00 | 02:00 |
+| Start Time               | 20:00 | 21:45 |
+| Finish Time              | 21:30 | 23:15 |
+| Actual Time to Complete  | 01:30 | 01:30 |
 
 ### Web Request-Response Cycle - completed with Ezgi Coban & Chris Lopez
 
