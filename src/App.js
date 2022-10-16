@@ -3,9 +3,8 @@ import './App.css';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
-import LocInfo from './LocInfo';
+import Main from './Main';
 
 class App extends React.Component {
 
@@ -19,8 +18,6 @@ class App extends React.Component {
             errorLocation: '',
             errorWeather: '',
             errorMovie: '',
-            // dispResults: false,
-            // dispError: false,
         }
     };
 
@@ -28,23 +25,12 @@ class App extends React.Component {
         this.setState({searchQuery: event.target.value});
     };
 
-    // getKeyPress = (event) => {
-    //     event.preventDefault();
-    //     console.log(event.key);
-    //     if(event.key === 'Enter'){
-    //         this.searchCity();
-    //     }
-    // };
-
-    // try/catch and <Alert> solution completed via pair programming with Andra Steele
     searchCity = async () => {
         try {
             const locationUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchQuery}&format=json`;
             const response = await axios.get(locationUrl);
             this.setState({location: response.data[0]});
             this.setState({
-                // dispResults: true,
-                // dispError: false,
                 errorLocation: ''
             }, () => {
                 this.searchWeather();
@@ -52,8 +38,6 @@ class App extends React.Component {
             });
         } catch (error) {
             this.setState({
-                // dispResults: false,
-                // dispError: true,
                 location: {},
                 errorLocation: error.message
             });
@@ -100,7 +84,6 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <h1>City Explorer</h1>
                 <Container>
                     <Form>
                         <Form.Group className="mb-3">
@@ -109,7 +92,6 @@ class App extends React.Component {
                                 onChange={this.getCity}
                                 type="text"
                                 placeholder="Seattle"
-                            // onKeyPress={this.getKeyPress} 
                             />
                         </Form.Group>
                         <Button
@@ -119,41 +101,15 @@ class App extends React.Component {
                             Explore!
                         </Button>
                     </Form>
-                    {this.state.errorLocation.length > 0 &&
-                        <Alert variant="danger">
-                            <Alert.Heading>
-                                Unable to find that location:<br/>
-                                {this.state.errorLocation}
-                            </Alert.Heading>
-                        </Alert>
-                    }
-                    {this.state.errorWeather.length > 0 &&
-                        <Alert variant="danger">
-                            <Alert.Heading>
-                                Unable to find the weather for that location:<br/>
-                                {this.state.errorWeather}
-                            </Alert.Heading>
-                        </Alert>
-                    }
-                    {this.state.errorMovie.length > 0 &&
-                        <Alert variant="danger">
-                            <Alert.Heading>
-                                Unable to find any movies for that location:<br/>
-                                {this.state.errorMovie}
-                            </Alert.Heading>
-                        </Alert>
-                    }
+                    <Main
+                        location={this.state.location}
+                        weather={this.state.weather}
+                        movies={this.state.movies}
+                        errorLocation={this.state.errorLocation}
+                        errorWeather={this.state.errorWeather}
+                        errorMovie={this.state.errorMovie}
+                    />
                 </Container>
-                <br />
-                <div>
-                    {(this.state.location.display_name || this.state.weather.date || this.state.movies.title) &&
-                        <LocInfo
-                            location={this.state.location}
-                            weather={this.state.weather}
-                            movies={this.state.movies}
-                        />
-                    }
-                </div>
             </div >
         );
     }
