@@ -85,6 +85,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Container>
+                    <h1>City Explorer</h1>
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Enter a city name</Form.Label>

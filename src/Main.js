@@ -9,7 +9,6 @@ class Main extends React.Component {
     render() {
         return (
             <div className="App">
-                <h1>City Explorer</h1>
                 <Container>
                     {(this.props.errorLocation.length > 0 || this.props.errorWeather.length > 0 || this.props.errorMovie.length > 0) &&
                         <Alert variant="danger">
