@@ -24,7 +24,8 @@ class Forecast extends React.Component {
         const forecast = this.props.forecast;
         return (
             <Card>
-                <Card.Title>{forecast.date}</Card.Title>
+                <Card.Title>{forecast.dateTime}</Card.Title>
+                <Card.Text>{forecast.cityName}</Card.Text>
                 <Card.Text><b>Outlook</b>: {forecast.description}</Card.Text>
                 <Card.Text><b>Low temp</b>: {forecast.lowTemp}</Card.Text>
                 <Card.Text><b>High temp</b>: {forecast.highTemp}</Card.Text>

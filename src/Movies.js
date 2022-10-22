@@ -23,10 +23,9 @@ class Movie extends React.Component{
     render() {
         const movie = this.props.movie;
         return (
-            <Card>
+            <Card key={movie.id}>
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Img
-                    id={movie.id}
                     src={movie.image_url}
                     alt={movie.title}
                     title={movie.title}
