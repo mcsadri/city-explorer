@@ -26,6 +26,7 @@ class LocInfo extends React.Component {
 
                     <Accordion.Item eventKey="3">
                         <Accordion.Header>Weather forecast</Accordion.Header>
+                        {/* <Accordion.Header>Weather forecast<br/>last updated: {this.props.weather[0].cacheDate}</Accordion.Header> */}
                         <Accordion.Body>
                             <Weather
                                 weather={this.props.weather}
